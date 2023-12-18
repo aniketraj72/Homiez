@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import userRouter from "./routes/user.route.js";
+import authRouter from "./routes/auth.route.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -14,6 +15,7 @@ mongoose
     console.log("Error occurred: " + err);
   });
 const app = express();
+app.use(express.json()); //by default we cannot directly use the json to the server so we have to first use express.json()
 
 const port = 3000;
 
@@ -22,3 +24,4 @@ app.listen(port, () => {
 });
 
 app.use("/api/user", userRouter);
+app.use("/api/auth", authRouter);
