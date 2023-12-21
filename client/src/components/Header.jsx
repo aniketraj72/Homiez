@@ -1,7 +1,9 @@
+import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function Header() {
+  console.log("Header");
   return (
     <header className="bg-slate-200 shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
@@ -24,7 +26,9 @@ function Header() {
         </form>
         <ul className="flex gap-4">
           <Link to="/">
-            <li className="hidden sm:inline text-slate-700 hover:underline">Home</li>
+            <li className="hidden sm:inline text-slate-700 hover:underline">
+              Home
+            </li>
           </Link>
           <Link to="about">
             <li className="hidden sm:inline text-slate-700 hover:underline">
