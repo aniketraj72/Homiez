@@ -59,6 +59,7 @@ export const google = async (req, res, next) => {
         password: hashedPassword,
         avatar: req.body.photo,
       });
+      console.log("in auth controller google: " + JSON.stringify(req.body));
       await newUser.save();
       const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
       const { passowrd: pass, ...rest } = newUser._doc;

@@ -10,10 +10,12 @@ export default function OAuth() {
   const navigate = useNavigate();
   const handleGoogleClick = async () => {
     try {
+      console.log("OAuth component triggered");
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
 
       const result = await signInWithPopup(auth, provider);
+      console.log("in oaut handleGoogleClick: " + JSON.stringify(result));
       const res = await fetch("/api/auth/google", {
         method: "POST",
         headers: {
@@ -25,7 +27,8 @@ export default function OAuth() {
           photo: result.user.photoURL,
         }),
       });
-      const data = res.json();
+      const data = await res.json();
+      console.log("result in oauth : " + data);
       dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
