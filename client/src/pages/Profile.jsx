@@ -18,6 +18,7 @@ function Profile() {
   const fileRef = useRef(null);
 
   console.log(file);
+  
   console.log(filePerc);
   console.log(fileUploadError);
   console.log("formData: ");
