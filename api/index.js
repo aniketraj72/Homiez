@@ -14,7 +14,7 @@ mongoose
     console.log("Connected to MongoDB");
   })
   .catch((err) => {
-    console.log("Error occurred: " + err);
+    // console.log("Error occurred: " + err);
   });
 const app = express();
 app.use(express.json()); //by default we cannot directly use the json to the server so we have to first use express.json()

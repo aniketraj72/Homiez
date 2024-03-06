@@ -10,16 +10,16 @@ export const test = (req, res) => {
 };
 
 export const updateUser = async (req, res, next) => {
-  console.log("updateUser: ");
-  console.log(req);
+  // console.log("updateUser: ");
+  // console.log(req);
   if (req.user.id !== req.params.id)
     return next(errorHandler(401, "You can only update your own account"));
   try {
     if (req.body.password) {
       req.body.password = bcryptjs.hashSync(req.body.password, 10);
-      console.log("in body password");
+      // console.log("in body password");
     }
-    console.log("in try body");
+    // console.log("in try body");
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       {
@@ -32,12 +32,12 @@ export const updateUser = async (req, res, next) => {
       },
       { new: true }
     );
-    console.log(" after updatedUser");
+    // console.log(" after updatedUser");
     const { password, ...rest } = updatedUser._doc;
     res.status(200).json(rest);
-    console.log("in update user");
+    // console.log("in update user");
   } catch (error) {
-    console.log(error.message);
+    // console.log(error.message);
     next(error);
   }
 };
@@ -62,7 +62,7 @@ export const getUserListings = async (req, res, next) => {
       const listings = await Listing.find({ userRef: req.params.id });
       res.status(200).json(listings);
     } catch (error) {
-      console.log("listings error");
+      // console.log("listings error");
       next(error);
     }
   } else {
