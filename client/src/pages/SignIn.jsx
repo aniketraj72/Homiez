@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,18 +9,26 @@ import {
 } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
 
-function SignIn() {
+function SignIn() { 
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (error != null && loading === true) {
+      signInFailure();
+      console.log("loading:(uf) " + loading);
+    }
+  }, [error]);
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
     });
   };
-
+  console.log("loading: " + loading);
+  console.log("error:" + error);
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -42,8 +50,10 @@ function SignIn() {
       navigate("/");
     } catch (error) {
       dispatch(signInFailure(error.message));
+      console.log("error");
     }
   };
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl text-center font-semibold my-7">SignIn</h1>
