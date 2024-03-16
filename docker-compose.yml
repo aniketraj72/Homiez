@@ -17,7 +17,7 @@ services:
       - ./client/:/app/
     container_name: frontend
     ports:
-      - "5178:5178"
+      - "5173:5173"
 
   api:
     build:
