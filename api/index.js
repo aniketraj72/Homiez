@@ -5,6 +5,7 @@ import authRouter from "./routes/auth.route.js";
 import listingRouter from "./routes/listing.route.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import morgan from "morgan";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ const app = express();
 
 app.use(express.json()); //by default we cannot directly use the json to the server so we have to first use express.json()
 app.use(cookieParser());
+app.use(morgan("combined"));
 
 const port = 3000;
 
