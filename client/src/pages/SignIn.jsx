@@ -9,7 +9,7 @@ import {
 } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
 
-function SignIn() { 
+function SignIn() {
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ function SignIn() {
       const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
-          "content-type": "application/json",
+          "Content-type": "application/json",
         },
         body: JSON.stringify(formData),
       });

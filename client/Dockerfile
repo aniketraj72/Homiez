@@ -9,6 +9,8 @@ ENV NODE_PATH /app/node_modules
 VOLUME $NODE_PATH
 
 COPY package.json /app/package.json
-RUN npm install --silent
+RUN npm install --force
+
+EXPOSE 5173
 
 CMD ["npm","run","dev"]

@@ -10,6 +10,9 @@ VOLUME $NODE_PATH
 
 COPY package.json /api/package.json
 
+# Install nodemon globally
+RUN npm install -g nodemon
+
 # COPY package.json .
 RUN npm install
 
