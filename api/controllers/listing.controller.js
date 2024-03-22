@@ -75,11 +75,11 @@ export const getListings = async(req,res,next) => {
     const startIndex = parseInt(req.query.startIndex) || 0;
     let offer = req.query.offer;
 
-    if(offer === 'undefined' || offer === 'false') {
+    if(offer === undefined || offer === 'false') {
       offer = { $in : [false,true]}
     }
 
-    let furnished = req.query.furnished;
+    let furnished = req.query.furnished ;
 
     if(furnished === undefined || furnished === 'false') {
       furnished = {$in : [false,true]}
@@ -100,7 +100,14 @@ export const getListings = async(req,res,next) => {
     const searchTerm = req.query.searchTerm || '';
     const sort = req.query.sort || 'createdAt';
 
+    console.log('searchTerm: ' + JSON.stringify(searchTerm))
+    console.log('type: ' + JSON.stringify(type))
+    console.log('parking ' + JSON.stringify(parking))
+    console.log('furnished: ' + JSON.stringify(furnished))
+ 
     const order = req.query.order || 'desc';
+    
+    console.log('order:' + order)
 
     const listings = await Listing.find({
       name : {$regex : searchTerm,$options:'i'},
@@ -112,6 +119,9 @@ export const getListings = async(req,res,next) => {
       [sort]:order
     }).limit(limit).skip(startIndex)
 
+
+    console.log("Listings:-")
+    console.log(JSON.stringify(listings))
     return res.status(200).json(listings)
 
   } catch (error) {
