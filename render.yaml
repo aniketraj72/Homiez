@@ -1,0 +1,9 @@
+services:
+  - name: client
+    env: ["WATCHPACK_POLLING=true"]
+    buildCommand: "docker-compose build client"
+    startCommand: "docker-compose up -d client"
+
+  - name: api
+    buildCommand: "docker-compose build api"
+    startCommand: "docker-compose up -d api"
