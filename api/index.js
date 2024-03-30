@@ -6,6 +6,8 @@ import listingRouter from "./routes/listing.route.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
+import path from 'path';
+
 
 dotenv.config();
 
@@ -17,6 +19,8 @@ mongoose
   .catch((err) => {
     // console.log("Error occurred: " + err);
   });
+
+const __dirname = path.resolve();
 const app = express();
 
 app.use(express.json()); //by default we cannot directly use the json to the server so we have to first use express.json()
@@ -33,6 +37,11 @@ app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
 
+app.use(express.static(path.join(__dirname,'/client/dist')))
+
+app.get('*',(req,res) => {
+  res.sendFile(path.join(__dirname,'client','dist','index.html'));
+})
 //middleware to handle errors
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
