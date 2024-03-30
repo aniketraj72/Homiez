@@ -1,11 +1,11 @@
 services:
   - name: client
     env: ["WATCHPACK_POLLING=true"]
-    dockerfilePath: client/Dockerfile
-    buildCommand: "docker-compose build client"
-    startCommand: "docker-compose up -d client"
+    dockerfilePath: ./client/Dockerfile
+    buildCommand: "docker-compose -f docker-compose.yml build client"
+    startCommand: "docker-compose -f docker-compose.yml up -d client"
 
   - name: api
-    dockerfilePath: api/Dockerfile
-    buildCommand: "docker-compose build api"
-    startCommand: "docker-compose up -d api"
+    dockerfilePath: ./api/Dockerfile
+    buildCommand: "docker-compose -f docker-compose.yml build api"
+    startCommand: "docker-compose -f docker-compose.yml up -d api"
